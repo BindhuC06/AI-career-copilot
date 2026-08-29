@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Career Copilot</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>AI Career Copilot</h1>
+
+        <p class="subtitle">
+            Analyze your resume and GitHub profile to get personalized career insights.
+        </p>
+
+        <div class="card">
+
+            <h2>Candidate Analysis</h2>
+
+            <form id="analyzeForm">
+
+                <label for="resume">
+                    Upload Resume (PDF)
+                </label>
+
+                <input
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    accept=".pdf"
+                    required
+                >
+
+                <label for="github_username">
+                    GitHub Username
+                </label>
+
+                <input
+                    type="text"
+                    id="github_username"
+                    name="github_username"
+                    placeholder="e.g. Apoorva-codess"
+                    required
+                >
+
+                <button type="submit">
+                    Analyze Candidate
+                </button>
+
+            </form>
+
+            <div id="loading" class="hidden">
+                Analyzing your profile...
+            </div>
+
+        </div>
+
+        <div id="results" class="hidden">
+
+            <h2>Career Analysis</h2>
+
+            <div class="result-section">
+                <h3>Skills</h3>
+                <ul id="skills"></ul>
+            </div>
+
+            <div class="result-section">
+                <h3>Strengths</h3>
+                <ul id="strengths"></ul>
+            </div>
+
+            <div class="result-section">
+                <h3>Skill Gaps</h3>
+                <ul id="skill-gaps"></ul>
+            </div>
+
+            <div class="result-section">
+                <h3>Recommendations</h3>
+                <ul id="recommendations"></ul>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/static/script.js"></script>
+
+</body>
+</html>
