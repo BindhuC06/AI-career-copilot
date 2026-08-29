@@ -1,0 +1,169 @@
+{
+    "courses": [
+        {
+            "title": "AI Literacy",
+            "skills_covered": [
+                "AI API",
+                "AI Evaluation"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/PLAN-1C903152880C",
+            "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/ai-literacy",
+            "duration": "3–10 hours",
+            "category": "Artificial Intelligence"
+        },
+        {
+            "title": "Data Analytics Fluency Pathway",
+            "skills_covered": [
+                "Statistical Inference",
+                "Data Analysis"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/PLAN-E76CA96A8C45?ngo-id=0302",
+            "badge_url": "",
+            "duration": "40+ hours",
+            "category": "Data & Analytics"
+        },
+        {
+            "title": "Build Your First Chatbot",
+            "skills_covered": [
+                "Chatbot Development",
+                "Natural Language Processing"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/ALM-COURSE_3946111?ngo-id=0302",
+            "badge_url": "",
+            "duration": "1–3 hours",
+            "category": "Artificial Intelligence"
+        },
+        {
+            "title": "Software Engineering for Web Developers Pathway",
+            "skills_covered": [
+                "FlexBox",
+                "Responsive Web Design"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/PLAN-F926DE21540D?ngo-id=0302",
+            "badge_url": "",
+            "duration": "40+ hours",
+            "category": "Software Development"
+        },
+        {
+            "title": "Cybersecurity Fundamentals",
+            "skills_covered": [
+                "Threat Assessment",
+                "Defense Tactics"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/PLAN-4FB8400F05FC?ngo-id=0302",
+            "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/cybersecurity-fundamentals",
+            "duration": "3–10 hours",
+            "category": "Cybersecurity"
+        },
+        {
+            "title": "Cloud Computing Fundamentals",
+            "skills_covered": [
+                "Database Security",
+                "Cloud Computing"
+            ],
+            "url": "https://skills.yourlearning.ibm.com/activity/PLAN-2EC3A305F2C3?ngo-id=0302",
+            "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/cloud-computing-fundamentals",
+            "duration": "3–10 hours",
+            "category": "Cloud Computing"
+        },
+        {
+    "title": "Enterprise Data Science in Practice",
+    "skills_covered": [
+        "Problem Solving",
+        "Data Analytics"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-0D62D9A52C35?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/enterprise-data-science-in-practice.1",
+    "duration": "3–10 hours",
+    "category": "Data & Analytics"
+},
+{
+    "title": "Generative AI Essentials: Using LLMs to Work with Data",
+    "skills_covered": [
+        "Data Summarization",
+        "Text Classification"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-D0F12976D81A?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/generative-ai-essentials-using-llms-to-work-with-da",
+    "duration": "3–10 hours",
+    "category": "Generative AI"
+},
+{
+    "title": "Machine Learning for Data Science Projects",
+    "skills_covered": [
+        "Machine Learning",
+        "Google Analytics"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-D8E7C82C1D76?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/machine-learning-for-data-science-projects.1",
+    "duration": "10–40 hours",
+    "category": "Machine Learning"
+},
+{
+    "title": "Intelligent by Design: Build an AI Agent",
+    "skills_covered": [
+        "Performance Evaluation",
+        "Agent Based Model"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-485AD4195FE9",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/build-an-ai-agent",
+    "duration": "3–10 hours",
+    "category": "Artificial Intelligence"
+},
+{
+    "title": "Getting Started with Cybersecurity",
+    "skills_covered": [
+        "Spyware",
+        "Anti Trojan"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-C7EE7CC95370?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/getting-started-with-cybersecurity",
+    "duration": "3–10 hours",
+    "category": "Cybersecurity"
+},
+{
+    "title": "Craft Precise Prompts for AI Models",
+    "skills_covered": [
+        "Prompt Design",
+        "Template"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-FEE211806964?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/craft-precise-prompts-for-ai-models.1",
+    "duration": "3–10 hours",
+    "category": "Generative AI"
+},
+{
+    "title": "AI-Enabled Applications for Customer Service",
+    "skills_covered": [
+        "Conversational AI",
+        "AI API"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-7A1C23D574F6?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/ai-enabled-applications-for-customer-service",
+    "duration": "3–10 hours",
+    "category": "Artificial Intelligence"
+},
+{
+    "title": "Make Agentic AI Work for You",
+    "skills_covered": [
+        "Workflow",
+        "Agent Intelligence"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-37BFD561DC25?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/make-agentic-ai-work-for-you",
+    "duration": "3–10 hours",
+    "category": "Generative AI"
+},
+{
+    "title": "AI Fundamentals: Foundations for Understanding AI",
+    "skills_covered": [
+        "XAI",
+        "Deep Learning"
+    ],
+    "url": "https://skills.yourlearning.ibm.com/activity/PLAN-56705048DB3F?ngo-id=0302",
+    "badge_url": "https://www.credly.com/org/ibm-skillsbuild/badge/ai-fundamentals-foundations-for-understanding-ai",
+    "duration": "3–10 hours",
+    "category": "Artificial Intelligence"
+}
+    ]
+}
