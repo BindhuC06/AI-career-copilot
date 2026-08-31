@@ -1,4 +1,9 @@
+import os
+import ssl
+ssl._create_default_https_context = ssl._create_unverified_context
+os.environ["CURL_CA_BUNDLE"] = ""
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.middleware.cors import CORSMiddleware
 from typing import Any, List, Optional
 from pydantic import BaseModel
 from .parsers import parse_resume, get_github_summary
@@ -8,6 +13,14 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.mount("/static", StaticFiles(directory="frontend"), name="static")
 @app.get("/app")
 def frontend():
@@ -40,7 +53,7 @@ async def analyze(
     }
 
 class ChatMessage(BaseModel):
-    role: str # "INTERVIEWER" or "CANDIDATE"
+    role: str # "INTERVIEWER" / "CANDIDATE"
     content: str
 
 class InterviewRequest(BaseModel):
@@ -52,8 +65,8 @@ class InterviewRequest(BaseModel):
 @app.post("/interview")
 async def interview_chat(request: InterviewRequest) -> dict[str, Any]:
     """
-    Handles a single turn of the mock interview chat.
-    If latest_user_answer is empty, it generates the very first question.
+    Handles a turn of the mock interview.
+    If latest_user_answer is empty, it generates the first question.
     """
     response = generate_interview_response(
         resume_text=request.resume_text,
