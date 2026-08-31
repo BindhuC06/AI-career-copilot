@@ -1,4 +1,4 @@
-from langchain_ollama import ChatOllama
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
@@ -10,16 +10,14 @@ class InterviewEvaluation(BaseModel):
     clarity_score: int = Field(description="Score from 0-10 for clarity of communication (0 if generating first question)")
     feedback: str = Field(description="Actionable feedback for the user's latest answer. (Leave empty if generating first question)")
     next_question: str = Field(description="The next technical or situational interview question based on their resume. Leave empty if concluding.")
-    is_concluded: bool = Field(description="True if the interview should end (usually after 3-4 questions).")
+    is_concluded: bool = Field(description="True if the interview should end (usually after 7-8 questions).")
 
 def generate_interview_response(resume_text: str, target_role: str, chat_history: List[Dict[str, str]], latest_user_answer: str = "") -> dict:
-    """
-    Module D: Adaptive Mock Interview Engine.
+    """Adaptive Mock Interview Engine.
     Evaluates the user's answer and generates the next question dynamically.
     """
-    
-    # Initialize the LLM (swap to Groq/OpenAI for speed if needed)
-    llm = ChatOllama(model="llama3.1", temperature=0.6)
+    # Initialize the LLM
+    llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash", temperature=0.6)
     parser = JsonOutputParser(pydantic_object=InterviewEvaluation)
     
     # Format chat history for context
