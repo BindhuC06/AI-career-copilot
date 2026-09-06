@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Career Copilot</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<input id="resume-file" name="resume" type="file" accept=".pdf,application/pdf" hidden>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">✦</div><div><b>Career Copilot</b><small>AI-powered career growth</small></div></div>
+    <nav>
+      <a class="active" href="#profile">Profile & Score</a>
+      <a href="#insights">Career Insights</a>
+      <a href="#roadmap">SkillsBuild Roadmap</a>
+      <a href="#interview">Mock Interview</a>
+    </nav>
+    <div class="tip"><b>Build your next step.</b><p>Upload your resume and connect GitHub to discover personalized career insights.</p></div>
+  </aside>
+
+  <main>
+    <header>
+      <div><label>CAREER INTELLIGENCE</label><h1>Your career, understood.</h1><p>Turn your resume and GitHub profile into actionable career insights.</p></div>
+      <div class="status">● Ready to analyze</div>
+    </header>
+
+    <section id="profile" class="hero">
+      <div class="card upload-card">
+        <label>01 · PROFILE</label><h2>Analyze your profile</h2>
+        <div class="dropzone" id="dropzone" role="button" tabindex="0" aria-label="Upload resume PDF">
+          <span class="upload-icon">↑</span>
+          <strong>Upload your resume</strong>
+          <small>Click here or drag & drop · PDF only · Maximum 20 MB</small>
+          <em id="file-name">No file selected</em>
+          <input id="resume" type="file" accept="application/pdf,.pdf">
+        </div>
+        <label class="field-label">GitHub username</label>
+        <div class="input"><span>@</span><input id="github" type="text" placeholder="e.g. octocat"></div>
+        <button id="analyze"><span id="analyze-label">Analyze Candidate</span><span id="analyze-arrow">→</span></button>
+        <p id="error"></p>
+      </div>
+
+      <div class="card score-card">
+        <label>CAREER READINESS</label>
+        <div class="ring" id="ring"><div><b id="score">--</b><small>/ 100</small></div></div>
+        <h3>Your readiness score</h3>
+        <p id="score-text">Analyze your profile to see your personalized career readiness.</p>
+        <div class="stats">
+          <div><b id="skill-count">0</b><small>Skills</small></div>
+          <div><b id="gap-count">0</b><small>Skill gaps</small></div>
+          <div><b id="action-count">0</b><small>Actions</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights">
+      <div class="section-head"><div><label>02 · INSIGHTS</label><h2>What your profile says</h2></div><small id="result-status">Waiting for analysis</small></div>
+      <div class="grid">
+        <article class="card insight"><i>✓</i><h3>Skills</h3><div id="skills-list" class="tags"><span class="empty">Analyze to discover your skills.</span></div></article>
+        <article class="card insight"><i>★</i><h3>Strengths</h3><ul id="strengths"><li class="empty">Your strongest areas will appear here.</li></ul></article>
+        <article class="card insight"><i>↗</i><h3>Skill gaps</h3><ul id="gaps"><li class="empty">Your priority learning areas will appear here.</li></ul></article>
+        <article class="card insight"><i>→</i><h3>Recommendations</h3><ul id="recommendations"><li class="empty">Personalized next steps will appear here.</li></ul></article>
+      </div>
+    </section>
+
+    <section id="roadmap" class="card roadmap">
+      <div><label>03 · LEARNING PATH</label><h2>SkillsBuild roadmap</h2><p>Use your identified gaps to guide the next stage of your learning journey.</p></div>
+      <div class="links"><a href="https://skillsbuild.org/" target="_blank">Explore SkillsBuild ↗</a><a href="https://skillsbuild.org/students" target="_blank">Student resources ↗</a></div>
+    </section>
+
+    <section id="interview" class="card interview">
+      <div><label>04 · PRACTICE</label><h2>Mock Interview</h2><p>Practice with a quick interview question and receive instant guidance.</p><button id="new-question" class="secondary">Start a question →</button></div>
+      <div class="practice">
+        <strong id="question">Click “Start a question” when you're ready.</strong>
+        <textarea id="answer" rows="5" placeholder="Type your answer here..."></textarea>
+        <button id="feedback" disabled>Get feedback</button>
+        <p id="feedback-text"></p>
+      </div>
+    </section>
+    <footer>AI Career Copilot · Your personalized path to career readiness.</footer>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
