@@ -11,9 +11,7 @@ from .analyzer import analyze_candidate
 from .interview_engine import generate_interview_response
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
-
 app = FastAPI()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,47 +19,32 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
-@app.get("/app")
-def frontend():
-    return FileResponse("frontend/index.html")
-
-@app.get("/")
-def home():
-    return {"message": "AI Career Copilot API is running!"}
-
 @app.post("/analyze")
 async def analyze(
     resume: UploadFile = File(...),
     github_username: str = Form(...),
     target_role: str = Form(default="Software Engineer")
 ) -> dict[str, Any]:
-
     resume_text: str = parse_resume(pdf_file=resume.file)
     github_data: dict[Any, Any] = get_github_summary(username=github_username)
-
     analysis: dict[str, Any] = analyze_candidate(
         resume_text=resume_text,
         github_data=github_data,
         target_role=target_role
     )
-
     return {
         "resume_text": resume_text,
         "github": github_data,
         "analysis": analysis
     }
-
 class ChatMessage(BaseModel):
     role: str # "INTERVIEWER" / "CANDIDATE"
     content: str
-
 class InterviewRequest(BaseModel):
     resume_text: str
     target_role: str
     chat_history: List[ChatMessage] = []
     latest_user_answer: Optional[str] = ""
-
 @app.post("/interview")
 async def interview_chat(request: InterviewRequest) -> dict[str, Any]:
     """
@@ -75,3 +58,6 @@ async def interview_chat(request: InterviewRequest) -> dict[str, Any]:
         latest_user_answer=request.latest_user_answer
     )
     return response
+
+# Serve Frontend
+app.mount('/', StaticFiles(directory='Frontend', html=True), name='frontend')
