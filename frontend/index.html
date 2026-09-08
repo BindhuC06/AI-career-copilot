@@ -38,7 +38,9 @@
         </div>
         <label class="field-label">GitHub username</label>
         <div class="input"><span>@</span><input id="github" type="text" placeholder="e.g. octocat"></div>
-        <button id="analyze"><span id="analyze-label">Analyze Candidate</span><span id="analyze-arrow">→</span></button>
+        <label class="field-label" style="margin-top: 15px;">Target Role</label>
+        <div class="input"><span style="color: transparent;">@</span><input id="target_role" type="text" placeholder="e.g. ML Engineer" value="Machine Learning Engineer"></div>
+        <button id="analyze" style="margin-top: 20px;"><span id="analyze-label">Analyze Candidate</span><span id="analyze-arrow">→</span></button>
         <p id="error"></p>
       </div>
 
@@ -67,7 +69,7 @@
 
     <section id="roadmap" class="card roadmap">
       <div><label>03 · LEARNING PATH</label><h2>SkillsBuild roadmap</h2><p>Use your identified gaps to guide the next stage of your learning journey.</p></div>
-      <div class="links"><a href="https://skillsbuild.org/" target="_blank">Explore SkillsBuild ↗</a><a href="https://skillsbuild.org/students" target="_blank">Student resources ↗</a></div>
+      <div class="links" id="course-links"><a href="https://skillsbuild.org/" target="_blank">Explore SkillsBuild ↗</a><a href="https://skillsbuild.org/students" target="_blank">Student resources ↗</a></div>
     </section>
 
     <section id="interview" class="card interview">

@@ -109,6 +109,23 @@ function renderAnalysis(raw) {
   renderList("gaps", gaps, "No skill gaps returned yet.");
   renderList("recommendations", recommendations, "No recommendations returned yet.");
 
+  const courses = data.recommended_courses || [];
+  const courseLinksDiv = $("course-links");
+  // Reset the default links
+  courseLinksDiv.innerHTML = '<a href="https://skillsbuild.org/" target="_blank">Explore SkillsBuild ↗</a><a href="https://skillsbuild.org/students" target="_blank">Student resources ↗</a>';
+  courses.forEach(course => {
+    if (course.title && course.url) {
+      const a = document.createElement("a");
+      a.href = course.url;
+      a.target = "_blank";
+      a.textContent = `Course: ${course.title} ↗`;
+      a.style.backgroundColor = "#e0e7ff";
+      a.style.color = "#4f46e5";
+      a.style.fontWeight = "bold";
+      courseLinksDiv.insertBefore(a, courseLinksDiv.firstChild);
+    }
+  });
+
   const score = getScore({ ...data, skills, strengths, skill_gaps: gaps, recommendations });
   $("score").textContent = score;
   $("ring").style.setProperty("--score-deg", `${score * 3.6}deg`);
@@ -134,18 +151,23 @@ function setLoading(loading) {
   resultStatus.textContent = loading ? "Analyzing profile…" : resultStatus.textContent;
 }
 
+let globalResumeText = "";
+let globalTargetRole = "Machine Learning Engineer";
+let globalChatHistory = [];
+
 analyze.addEventListener("click", async () => {
   showError("");
   const file = resume.files[0];
   const username = github.value.trim().replace(/^@+/, "");
+  globalTargetRole = $("target_role").value.trim() || "Machine Learning Engineer";
   const fileProblem = validateFile(file);
   if (fileProblem) return showError(fileProblem);
   if (!username) return showError("Please enter your GitHub username.");
-  if (!/^[a-zA-Z0-9-]{1,39}$/.test(username)) return showError("Enter a valid GitHub username.");
 
   const form = new FormData();
   form.append("resume", file);
   form.append("github_username", username);
+  form.append("target_role", globalTargetRole);
   setLoading(true);
 
   try {
@@ -156,6 +178,10 @@ analyze.addEventListener("click", async () => {
       const message = payload.detail || payload.message || `Analysis server returned ${response.status}.`;
       throw new Error(message);
     }
+    
+    // Save resume text for the interview step
+    globalResumeText = payload.resume_text || "";
+    
     renderAnalysis(payload);
     $("insights").scrollIntoView({ behavior: "smooth", block: "start" });
   } catch (err) {
@@ -177,35 +203,77 @@ github.addEventListener("input", () => {
   github.value = github.value.replace(/\s/g, "");
 });
 
-const questions = [
-  "Tell me about a project you are most proud of and the impact it created.",
-  "What technical skill are you currently improving, and why?",
-  "Describe a difficult technical problem you solved and how you approached it.",
-  "How do you learn a new technology when you have never used it before?",
-  "Tell me about a time you worked with a team to deliver a technical project."
-];
-
-$("new-question").onclick = () => {
-  const question = questions[Math.floor(Math.random() * questions.length)];
-  $("question").textContent = question;
+$("new-question").onclick = async () => {
+  $("question").textContent = "Generating a personalized question...";
   $("answer").value = "";
   $("feedback-text").textContent = "";
-  $("feedback").disabled = false;
-  $("answer").focus();
+  $("feedback").disabled = true;
+  globalChatHistory = [];
+  
+  try {
+    const response = await fetch("/interview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        resume_text: globalResumeText,
+        target_role: globalTargetRole,
+        chat_history: [],
+        latest_user_answer: ""
+      })
+    });
+    const data = await response.json();
+    $("question").textContent = data.next_question;
+    globalChatHistory.push({ role: "INTERVIEWER", content: data.next_question });
+    $("feedback").disabled = false;
+    $("answer").focus();
+  } catch (err) {
+    $("question").textContent = "Failed to load question from AI.";
+  }
 };
 
-$("feedback").onclick = () => {
+$("feedback").onclick = async () => {
   const answer = $("answer").value.trim();
-  const words = answer ? answer.split(/\s+/).length : 0;
-  if (!words) {
+  if (!answer) {
     $("feedback-text").textContent = "Write an answer first, then request feedback.";
     return;
   }
-  $("feedback-text").textContent = words < 25
-    ? "Add more detail: explain the situation, what you personally did, and the result."
-    : words < 60
-      ? "Good start. Add measurable impact and one specific technical decision."
-      : "Strong answer. Keep it structured: situation → action → result → learning.";
+  
+  $("feedback").disabled = true;
+  $("feedback-text").innerHTML = "<i>Analyzing answer...</i>";
+  
+  try {
+    const response = await fetch("/interview", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        resume_text: globalResumeText,
+        target_role: globalTargetRole,
+        chat_history: globalChatHistory,
+        latest_user_answer: answer
+      })
+    });
+    
+    const data = await response.json();
+    globalChatHistory.push({ role: "CANDIDATE", content: answer });
+    
+    $("feedback-text").innerHTML = `<b>Score: ${data.accuracy_score}/10</b><br/>${data.feedback}`;
+    
+    if (data.next_question) {
+      $("question").textContent = data.next_question;
+      globalChatHistory.push({ role: "INTERVIEWER", content: data.next_question });
+      $("answer").value = "";
+    }
+    
+    if (data.is_concluded) {
+      $("question").textContent = "Interview Concluded. Great job!";
+      $("feedback").disabled = true;
+    } else {
+      $("feedback").disabled = false;
+    }
+  } catch (err) {
+    $("feedback-text").textContent = "Error getting feedback from AI.";
+    $("feedback").disabled = false;
+  }
 };
 
 // Highlight the current section in the sidebar while scrolling.
