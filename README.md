@@ -8,7 +8,7 @@
 The application is fully containerized and hosted live on AWS EC2! 
 **Try it here:** `http://54.157.236.126:8000/` 
 
-## 💡 Inspiration
+## Inspiration
 Job seekers, especially students, often struggle to identify exactly what skills they are missing for their dream roles. **AI Career Copilot** bridges this gap by cross-referencing a candidate's resume and live GitHub portfolio against their target job role. It doesn't just point out flaws—it provides a direct, actionable learning roadmap using the **IBM SkillsBuild** catalog and prepares the candidate with adaptive, AI-driven mock interviews.
 
 ## Key Features
