@@ -1,4 +1,4 @@
-# AI Career Copilot
+﻿# AI Career Copilot
 
 **AI-powered career growth, gap analysis, and interactive interview prep.**
 
@@ -9,7 +9,7 @@ The application is fully containerized and hosted live on AWS EC2!
 **Try it here:** `http://54.157.236.126:8000/` 
 
 ## Inspiration
-Job seekers, especially students, often struggle to identify exactly what skills they are missing for their dream roles. **AI Career Copilot** bridges this gap by cross-referencing a candidate's resume and live GitHub portfolio against their target job role. It doesn't just point out flaws—it provides a direct, actionable learning roadmap using the **IBM SkillsBuild** catalog and prepares the candidate with adaptive, AI-driven mock interviews.
+Job seekers, especially students, often struggle to identify exactly what skills they are missing for their dream roles. **AI Career Copilot** bridges this gap by cross-referencing a candidate's resume and live GitHub portfolio against their target job role. It doesn't just point out flaws, it provides a direct and actionable learning roadmap using the **IBM SkillsBuild** course catalog and prepares the candidate with adaptive, AI-driven mock interviews.
 
 ## Key Features
 * **Resume & Portfolio Analysis:** Parses PDF resumes and fetches live GitHub repository data to understand the candidate's true technical foundation.
@@ -18,13 +18,12 @@ Job seekers, especially students, often struggle to identify exactly what skills
 * **Interactive AI Mock Interviews:** An embedded chat interface that generates adaptive technical interview questions based on the candidate's profile, evaluates their answers, and provides instant, scored feedback.
 * **Sleek Dashboard UI:** A beautiful, responsive frontend to visualize career readiness scores, strengths, and recommendations.
 
-## Architecture
+## Architecture & Tools Used
+* **AI Coding Agent-IBM Bob:** We heavily utilized **IBM Bob (IDE & Coding Agent)** throughout our development lifecycle. Bob accelerated our coding by generating the FastAPI boilerplate code, writing the complex LangChain logic for Gemini, and debugging a lot of our Docker container configurations.
 * **Frontend:** Vanilla HTML, CSS, and JavaScript.
 * **Backend:** Python & FastAPI.
 * **AI Engine:** Google Gemini (`gemini-3.6-flash`) via LangChain.
 * **Deployment:** Fully Dockerized and hosted on an AWS EC2 instance.
-
----
 
 ## How to Run Locally
 
