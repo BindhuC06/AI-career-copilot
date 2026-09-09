@@ -25,6 +25,19 @@ async def analyze(
     github_username: str = Form(...),
     target_role: str = Form(default="Software Engineer")
 ) -> dict[str, Any]:
+    # LOOPHOLE FIX: Validate file type
+    if resume.content_type not in ("application/pdf", "application/octet-stream") and not resume.filename.lower().endswith(".pdf"):
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="Please upload a valid PDF file.")
+        
+    # LOOPHOLE FIX: Validate file size (Limit to 10MB to protect AWS Free Tier)
+    resume.file.seek(0, 2)
+    file_size = resume.file.tell()
+    resume.file.seek(0)
+    if file_size > 10 * 1024 * 1024:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=413, detail="Resume file is too large. Maximum size is 10MB.")
+
     resume_text: str = parse_resume(pdf_file=resume.file)
     github_data: dict[Any, Any] = get_github_summary(username=github_username)
     analysis: dict[str, Any] = analyze_candidate(
